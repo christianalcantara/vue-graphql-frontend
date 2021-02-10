@@ -1,0 +1,9 @@
+mutation CreateCharacter($name: String!, $description: String!) {
+  createCharacter(name: $name, description: $description) {
+    character {
+      id
+      name
+      description
+    }
+  }
+}

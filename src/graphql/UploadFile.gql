@@ -1,0 +1,5 @@
+mutation UploadFile($pk: String!, $file: Upload!) {
+  uploadThumbnail(pk: $pk, file: $file) {
+    success
+  }
+}
