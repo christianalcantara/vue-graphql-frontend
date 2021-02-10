@@ -4,12 +4,12 @@
       :query="require('../graphql/Character.gql')"
   >
     <v-row slot-scope="{ result: { data } }"
-           no-gutters
-           class="mb-3">
+           class="mb-3"
+           no-gutters>
       <template v-if="data">
         <v-flex v-for="node of data.characters.edges"
                 :key="node.node.id"
-                d-flex class="xs12 sm4 md3">
+                class="xs12 sm4 md3" d-flex>
           <v-card class="mb-6">
             <v-avatar
                 class="profile"
@@ -17,12 +17,12 @@
                 size="300"
                 tile
             >
-            <v-img
-                class="white--text align-end"
-                :src="node.node.thumbUrl"
-            >
-              <v-card-title>{{ node.node.name }}</v-card-title>
-            </v-img>
+              <v-img
+                  :src="node.node.thumbUrl"
+                  class="white--text align-end"
+              >
+                <v-card-title>{{ node.node.name }}</v-card-title>
+              </v-img>
             </v-avatar>
             <v-card-subtitle class="pb-0">
 
@@ -34,14 +34,13 @@
 
             <v-fab-transition>
               <v-btn
-
-                  color="primary"
-                  fab
-                  dark
-                  small
                   absolute
                   bottom
+                  color="primary"
+                  dark
+                  fab
                   right
+                  small
               >
                 <v-icon>mdi-heart</v-icon>
               </v-btn>

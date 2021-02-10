@@ -21,16 +21,16 @@
 
 
       <v-btn class="ml-4"
-          to="/"
-          text
+             text
+             to="/"
       >
         <span class="mr-2">Home</span>
       </v-btn>
       <v-spacer></v-spacer>
 
       <v-btn
-          to="add_character"
           text
+          to="add_character"
       >
         <span class="mr-2">Add</span>
         <v-icon>mdi-open-in-new</v-icon>
@@ -40,7 +40,7 @@
     <v-main>
       <v-container fluid grid-list-md>
         <v-col cols="12">
-          <v-layout row wrap justify-center>
+          <v-layout justify-center row wrap>
             <router-view/>
           </v-layout>
         </v-col>

@@ -1,35 +1,35 @@
 <template>
 
-  <v-form v-on:submit.prevent="formValid"
-          ref="form"
+  <v-form ref="form"
           v-model="valid"
           lazy-validation
           style="width: 50%"
+          v-on:submit.prevent="formValid"
   >
     <v-text-field
         v-model="name"
         :counter="40"
         :rules="nameRules"
         label="Name"
-        required
         outlined
+        required
     ></v-text-field>
 
     <v-textarea
         v-model="description"
         label="Description"
-        required
         outlined
+        required
     ></v-textarea>
     <v-file-input
         v-model="thumbnail"
         :rules="thumbnailRules"
-        label="Thumbnail"
         counter
+        label="Thumbnail"
+        outlined
+        required
         show-size
         truncate-length="21"
-        required
-        outlined
     ></v-file-input>
     <v-alert
         v-model="erro"
@@ -40,9 +40,9 @@
     </v-alert>
 
     <v-btn
-        class="mt-3 ma-2"
         :disabled="!valid || loading"
         :loading="loading"
+        class="mt-3 ma-2"
         color="success"
         @click="submit"
     >

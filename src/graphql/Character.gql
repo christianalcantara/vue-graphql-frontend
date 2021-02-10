@@ -1,14 +1,14 @@
 query Characters {
-    characters {
-        edges {
-            node {
-                id
-                created
-                modified
-                name
-                description
-                thumbUrl,
-            }
-        }
+  characters {
+    edges {
+      node {
+        id
+        created
+        modified
+        name
+        description
+        thumbUrl,
+      }
     }
+  }
 }
