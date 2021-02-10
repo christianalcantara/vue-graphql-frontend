@@ -15,7 +15,6 @@
             transition="scale-transition"
             width="40"
         />
-
         <h2>Super Hero</h2>
       </div>
 
@@ -29,11 +28,11 @@
       <v-spacer></v-spacer>
 
       <v-btn
-          text
+          color="success"
           to="add_character"
       >
         <span class="mr-2">Add</span>
-        <v-icon>mdi-open-in-new</v-icon>
+        <v-icon>mdi-plus</v-icon>
       </v-btn>
     </v-app-bar>
 

@@ -1,0 +1,151 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"This class removes base64 unique ids and operates with plain Integer IDs"
+interface DjangoNode {
+  "The ID of the object"
+  id: ID!
+}
+
+type CharacterType implements DjangoNode {
+  created: DateTime!
+  description: String
+  "The ID of the object"
+  id: ID!
+  modified: DateTime!
+  name: String!
+  thumbUrl: String
+  thumbnail: String
+}
+
+type CharacterTypeConnection {
+  "Contains the nodes in this connection."
+  edges: [CharacterTypeEdge]!
+  "Pagination data for this connection."
+  pageInfo: PageInfo!
+}
+
+"A Relay edge containing a `CharacterType` and its cursor."
+type CharacterTypeEdge {
+  "A cursor for use in pagination"
+  cursor: String!
+  "The item at the end of the edge"
+  node: CharacterType
+}
+
+type CreateCharacter {
+  character: CharacterType
+}
+
+type CreateUserField {
+  user: UserType
+}
+
+type FavoriteType implements DjangoNode {
+  character: CharacterType!
+  created: DateTime!
+  "The ID of the object"
+  id: ID!
+  user: UserType!
+}
+
+type Mutation {
+  createCharacter(description: String, name: String!): CreateCharacter
+  createUser(email: String!, password: String!, username: String!): CreateUserField
+  refreshToken(token: String): Refresh
+  tokenAuth(password: String!, username: String!): ObtainJSONWebToken
+  updateCharacter(description: String, name: String, pk: Int!): UpdateCharacter
+  uploadThumbnail(file: Upload!, pk: String!): UploadMutation
+  verifyToken(token: String): Verify
+}
+
+type ObtainJSONWebToken {
+  payload: GenericScalar!
+  refreshExpiresIn: Int!
+  token: String!
+  user: UserType
+}
+
+"The Relay compliant `PageInfo` type, containing data necessary to paginate this connection."
+type PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
+
+type Query {
+  character(id: String): CharacterType
+  characters(after: String, before: String, first: Int, id: String, last: Int, name: String, offset: Int): CharacterTypeConnection
+  favorite(
+    "The ID of the object"
+    id: ID!
+  ): FavoriteType
+  me: UserType
+}
+
+type Refresh {
+  payload: GenericScalar!
+  refreshExpiresIn: Int!
+  token: String!
+}
+
+type UpdateCharacter {
+  character: CharacterType
+}
+
+type UploadMutation {
+  success: Boolean
+}
+
+type UserType implements DjangoNode {
+  dateJoined: DateTime!
+  email: String!
+  firstName: String!
+  "The ID of the object"
+  id: ID!
+  "Designates whether this user should be treated as active. Unselect this instead of deleting accounts."
+  isActive: Boolean!
+  "Designates whether the user can log into this admin site."
+  isStaff: Boolean!
+  "Designates that this user has all permissions without explicitly assigning them."
+  isSuperuser: Boolean!
+  lastLogin: DateTime
+  lastName: String!
+  password: String!
+  "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+  username: String!
+}
+
+type Verify {
+  payload: GenericScalar!
+}
+
+
+"""
+The `DateTime` scalar type represents a DateTime
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar DateTime
+
+"""
+Create scalar that ignores normal serialization/deserialization, since
+that will be handled by the multipart request spec
+"""
+scalar Upload
+
+"""
+The `GenericScalar` scalar type represents a generic
+GraphQL scalar value that could be:
+String, Boolean, Int, Float, List or Object.
+"""
+scalar GenericScalar

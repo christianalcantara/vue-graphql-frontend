@@ -1,56 +1,54 @@
 <template>
+  <v-container fluid>
+      <ApolloQuery
+          :query="require('../graphql/Character.gql')"
+          poll-interval="1000"
+      >
 
-  <ApolloQuery
-      :query="require('../graphql/Character.gql')"
-  >
-    <v-row slot-scope="{ result: { data } }"
-           class="mb-3"
-           no-gutters>
-      <template v-if="data">
-        <v-flex v-for="node of data.characters.edges"
+        <v-row slot-scope="{ result: { data } }"
+               dense
+        >
+          <template v-if="data">
+            <v-col
+                v-for="node of data.characters.edges"
                 :key="node.node.id"
-                class="xs12 sm4 md3" d-flex>
-          <v-card class="mb-6">
-            <v-avatar
-                class="profile"
-                color="grey"
-                size="300"
-                tile
+                cols="3"
             >
-              <v-img
-                  :src="node.node.thumbUrl"
-                  class="white--text align-end"
-              >
-                <v-card-title>{{ node.node.name }}</v-card-title>
-              </v-img>
-            </v-avatar>
-            <v-card-subtitle class="pb-0">
+              <v-card>
+                <v-img
+                    :src="node.node.thumbUrl"
+                    class="white--text align-end"
+                    gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                    height="200px"
+                >
+                  <v-card-title v-text="node.node.name"></v-card-title>
+                </v-img>
+                <v-card-subtitle>
+                    <small>{{ node.node.description || 'NO DESCRIPTION' }}</small><br>
+                </v-card-subtitle>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
 
-            </v-card-subtitle>
+                  <v-btn icon disabled="true">
+                    <v-icon>mdi-heart</v-icon>
+                  </v-btn>
 
-            <v-card-text class="text--primary" style="max-height: 150px; height: 150px">
-              <div>{{ node.node.description || 'no description' }}</div>
-            </v-card-text>
+                  <v-btn icon>
+                    <v-icon color="red">mdi-delete</v-icon>
+                  </v-btn>
 
-            <v-fab-transition>
-              <v-btn
-                  absolute
-                  bottom
-                  color="primary"
-                  dark
-                  fab
-                  right
-                  small
-              >
-                <v-icon>mdi-heart</v-icon>
-              </v-btn>
-            </v-fab-transition>
-          </v-card>
+                  <v-btn icon>
+                    <v-icon color="info">mdi-pen</v-icon>
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-col>
 
-        </v-flex>
-      </template>
-    </v-row>
-  </ApolloQuery>
+          </template>
+        </v-row>
+      </ApolloQuery>
+  </v-container>
+
 
 </template>
 
@@ -59,7 +57,12 @@ export default {
   name: 'HomePage',
   apollo: {},
   data: () => ({
-    dialog: false
+    dialog: false,
+    cards: [
+      { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 12 },
+      { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 6 },
+      { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 6 },
+    ],
   }),
 }
 </script>
